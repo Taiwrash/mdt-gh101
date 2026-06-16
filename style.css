@@ -1,8 +1,6 @@
 /* ==========================================================================
    Midnight Git Sandbox - Design System (Dieter Rams Principles Alignment)
    ========================================================================== */
-
-/* Design Tokens & Theme Variables */
 :root {
   --color-bg-darker: #0a0a0c;
   --color-bg-dark: #111114;
