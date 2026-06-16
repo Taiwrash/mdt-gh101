@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Midnight Git Sandbox & Proof of Contribution</title>
+  <meta name="description" content="An interactive Git sandbox and Zero-Knowledge Proof of Contribution directory for the builders and stakeholders of the Midnight Network Build Club.">
+  
+  <!-- Modern Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Design Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="header-container header-flex">
+      <div class="header-left">
+        <div class="logo-area">
+          <span class="logo-dot"></span>
+          <h1>Midnight Git Sandbox</h1>
+        </div>
+        <p class="subtitle">An interactive terminal and Zero-Knowledge Proof directory built for the Midnight Build Club.</p>
+      </div>
+      <div class="header-right">
+        <a href="https://github.com/taiwrash/mdt-gh101" target="_blank" rel="noopener" class="btn btn-secondary btn-header">
+          <svg style="margin-right: 4px;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          ★ Star Repo
+        </a>
+        <a href="https://github.com/taiwrash/mdt-gh101" target="_blank" rel="noopener" class="btn btn-primary btn-header">
+          <svg style="margin-right: 4px;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+          View Repo / Request Access
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-container">
+    <div class="grid-layout">
+      
+      <!-- COLUMN 1: INTERACTIVE GIT SANDBOX -->
+      <section class="panel sandbox-panel" aria-labelledby="sandbox-heading">
+        <div class="panel-header">
+          <h2 id="sandbox-heading">1. Git Sandbox & Visualizer</h2>
+          <span class="badge">Interactive Terminal</span>
+        </div>
+        <p class="panel-desc">Type Git commands or use the quick actions below to see how commits build a branch history.</p>
+        
+        <!-- SVG Commit Graph Container -->
+        <div class="graph-viewport">
+          <svg id="git-graph" width="100%" height="240" xmlns="http://www.w3.org/2000/svg">
+            <!-- Graph nodes and paths will be rendered here dynamically -->
+          </svg>
+          <div class="graph-legend">
+            <span class="legend-item"><span class="color-dot main-dot"></span> main</span>
+            <span class="legend-item"><span class="color-dot dev-dot"></span> branch</span>
+            <span class="legend-item"><span class="color-dot head-dot"></span> HEAD</span>
+          </div>
+        </div>
+
+        <!-- Terminal Interface -->
+        <div class="terminal-interface">
+          <div class="terminal-header">
+            <span class="terminal-btn close"></span>
+            <span class="terminal-btn minimize"></span>
+            <span class="terminal-btn expand"></span>
+            <span class="terminal-title">bash — git-sandbox</span>
+          </div>
+          <div class="terminal-body" id="terminal-body">
+            <div class="terminal-line text-muted">Initialized empty Git repository in /workspace/midnight-build-club/</div>
+            <div class="terminal-line text-muted">Current branch: main</div>
+            <div class="terminal-line text-muted">Type "help" to see available commands.</div>
+          </div>
+          <div class="terminal-input-row">
+            <span class="terminal-prompt">midnight@sandbox:~$</span>
+            <input type="text" id="terminal-input" autocomplete="off" spellcheck="false" placeholder="git commit -m &quot;my commit&quot;" aria-label="Git Terminal Command">
+          </div>
+        </div>
+
+        <!-- Quick Action Buttons -->
+        <div class="quick-actions">
+          <button id="btn-git-commit" class="btn btn-secondary">git commit</button>
+          <button id="btn-git-branch" class="btn btn-secondary">git branch</button>
+          <button id="btn-git-checkout" class="btn btn-secondary">git checkout</button>
+          <button id="btn-git-merge" class="btn btn-secondary">git merge</button>
+          <button id="btn-git-reset" class="btn btn-muted">Reset Repo</button>
+        </div>
+      </section>
+
+      <!-- COLUMN 2: ZK PROOF GENERATOR -->
+      <section class="panel generator-panel" aria-labelledby="generator-heading">
+        <div class="panel-header">
+          <h2 id="generator-heading">2. ZK Proof Generator</h2>
+          <span class="badge">Proof of Contribution</span>
+        </div>
+        <p class="panel-desc">Generate your cryptographic proof JSON to make a pull request and add yourself to the board.</p>
+
+        <form id="proof-form" class="proof-form" onsubmit="return false;">
+          <div class="form-group">
+            <label for="input-username">GitHub Username</label>
+            <input type="text" id="input-username" required placeholder="e.g. taiwrash">
+          </div>
+          
+          <div class="form-group">
+            <label for="input-project">Project Name</label>
+            <input type="text" id="input-project" required placeholder="e.g. Midnight Voting DApp">
+          </div>
+
+          <div class="form-group">
+            <label for="input-secret">Private Passphrase (Secret ZK Input)</label>
+            <input type="password" id="input-secret" required placeholder="This secret stays private on your local machine">
+            <small class="form-tip">Simulates a private witness. Never pushed, only its hash is committed.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="input-commitment">Public Commitment Statement</label>
+            <textarea id="input-commitment" required rows="3" placeholder="What are you building during the Midnight Build Club?"></textarea>
+          </div>
+
+          <button type="submit" id="btn-generate-proof" class="btn btn-primary">Generate Cryptographic Proof</button>
+        </form>
+
+        <!-- Proof Output Area (Hidden initially) -->
+        <div id="proof-output" class="proof-output hidden">
+          <div class="output-header">
+            <h3>Generated ZK Proof Object</h3>
+            <div class="actions">
+              <button id="btn-copy-proof" class="btn-icon" title="Copy to Clipboard">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              </button>
+              <button id="btn-download-proof" class="btn-icon" title="Download JSON">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              </button>
+            </div>
+          </div>
+          <pre><code id="proof-code-block" class="language-json"></code></pre>
+          
+          <div class="steps-box">
+            <h4>How to submit this proof:</h4>
+            
+            <div class="step-option">
+              <h5 style="font-size: 0.8rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--color-text-primary);">Option A: Directly on GitHub.com (Recommended)</h5>
+              <ol class="step-list">
+                <li>Click the copy icon above to copy the JSON proof to your clipboard.</li>
+                <li>Fork this repository on GitHub to your account.</li>
+                <li>In your fork, navigate to the <code class="code-span">proofs/</code> directory and click <strong>Add file &gt; Create new file</strong>.</li>
+                <li>Name the file <span id="proof-filename-web" class="code-span">username.json</span>, paste the JSON content, and click <strong>Commit changes...</strong> (commit directly to `main`).</li>
+                <li>Navigate back to the original repository and open a <strong>Pull Request</strong> from your fork.</li>
+              </ol>
+            </div>
+
+            <div class="step-option" style="margin-top: 1rem; border-top: 1px dashed var(--color-border-subtle); padding-top: 1rem;">
+              <h5 style="font-size: 0.8rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--color-text-secondary);">Option B: Local Command Line</h5>
+              <ol class="step-list">
+                <li>Click the download icon above to save the file as <span id="proof-filename" class="code-span">username.json</span>.</li>
+                <li>Fork and clone the repository.</li>
+                <li>Create a branch: <code class="code-span">git checkout -b proof/username</code></li>
+                <li>Add your downloaded JSON file to the <code class="code-span">proofs/</code> folder.</li>
+                <li>Commit & Push: <code class="code-span">git commit -am "add proof"</code>, <code class="code-span">git push origin proof/username</code></li>
+                <li>Open a **Pull Request** to the upstream repository!</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- FULL WIDTH DIRECTORY -->
+    <section class="panel directory-section" aria-labelledby="directory-heading">
+      <div class="panel-header">
+        <h2 id="directory-heading">Board of Confidential Graduates</h2>
+        <span class="badge-accent" id="graduates-count">0 Graduates</span>
+      </div>
+      <p class="panel-desc">These builders have successfully submitted their Zero-Knowledge proof of contribution. Click "Verify Proof" on any card to run the verification engine.</p>
+      
+      <div class="builders-grid" id="builders-grid">
+        <!-- Contributor cards will be dynamically loaded here -->
+        <div class="loading-state">
+          <span class="loader"></span>
+          <p>Loading builder registry...</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>Midnight Git Sandbox • Built in alignment with Dieter Rams' Principles of Good Design.</p>
+      <p class="footer-links">
+        <a href="https://midnight.network" target="_blank" rel="noopener">Midnight Network</a>
+        <span class="divider">•</span>
+        <a href="https://midnight.network/build-club" target="_blank" rel="noopener">Build Club</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Native HTML5 Dialog for Verifying Proof -->
+  <dialog id="verify-dialog" class="verify-dialog">
+    <div class="dialog-content">
+      <header class="dialog-header">
+        <h3>ZK Verification Protocol</h3>
+        <button id="btn-close-dialog" class="dialog-close">&times;</button>
+      </header>
+      <div class="dialog-body">
+        <div class="verification-animation">
+          <div class="scanner-line"></div>
+          <div class="nodes-container">
+            <div class="node-circle input-node">Public Input</div>
+            <div class="node-connection"></div>
+            <div class="node-circle verifier-node">Verifier</div>
+            <div class="node-connection"></div>
+            <div class="node-circle proof-node">ZK Proof</div>
+          </div>
+        </div>
+        <div class="verification-log" id="verification-log">
+          <!-- Logs will be written here dynamically -->
+        </div>
+      </div>
+      <footer class="dialog-footer">
+        <button id="btn-dialog-done" class="btn btn-muted" disabled>Running Protocol...</button>
+      </footer>
+    </div>
+  </dialog>
+
+  <!-- Interactive Logic Script -->
+  <script src="app.js"></script>
+</body>
+</html>
