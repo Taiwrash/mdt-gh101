@@ -50,10 +50,6 @@ jobs:
             git commit -m "chore: auto-compile proofs.json [skip ci]"
             git push origin main
           fi
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
